@@ -3,7 +3,7 @@ import sys
 import glob
 import os
 FNULL = open(os.devnull, 'w')
-inis = glob.glob('*.ini')
+inis = glob.glob('sources_*.ini')
 inis = [x.split('.')[0] for x in inis]
 
 print inis
