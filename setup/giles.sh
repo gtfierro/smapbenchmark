@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get install -y golang git mongodb mercurial libprotobuf-dev readingdb python-pip
 
 cd
-GOPATH=`pwd`/go
+export GOPATH=`pwd`/go
 git clone https://github.com/gtfierro/giles
 cd giles/giles
 go get code.google.com/p/goprotobuf/proto
