@@ -5,7 +5,7 @@ import uuid
 
 configfile="""
 [report 0]
-ReportDeliveryLocation = http://localhost:8079/add/{apikey}
+ReportDeliveryLocation = http://{archiverip}:8079/add/{apikey}
 
 [/]
 uuid = {uuid}
@@ -22,16 +22,17 @@ number = {number}
 
 if len(sys.argv) == 1 or len(sys.argv) > 6:
     print '''\
-Usage: python create.py <drivername> <number of drivers> <endpoints per driver> <publish rate> <apikey>
-Example: python create.py sequential.SeqDriver 5 2 .01
+Usage: python create.py <drivername> <number of drivers> <endpoints per driver> <publish rate> <archiverip> <apikey>
+Example: python create.py sequential.SeqDriver 5 2 .01 127.0.0.1 asdfasdfasdfasdf
 '''
 sourcename = sys.argv[1]
 numdrivers = int(sys.argv[2])
 endpoints = int(sys.argv[3])
 pubrate = float(sys.argv[4])
-apikey = sys.argv[5]
+archiverip = sys.argv[5]
+apikey = sys.argv[6]
 
-s = StringIO(configfile.format(uuid=str(uuid.uuid1()),driver=sourcename, rate=pubrate, number=endpoints, apikey=apikey))
+s = StringIO(configfile.format(uuid=str(uuid.uuid1()),driver=sourcename, rate=pubrate, number=endpoints, archiverip=archiverip, apikey=apikey))
 
 source = RawConfigParser()
 source.optionxform=str
