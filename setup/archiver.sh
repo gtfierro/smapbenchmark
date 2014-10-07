@@ -7,6 +7,6 @@ sudo apt-get install -y python-smap readingdb powerdb2 git python-pip
 
 # get latest version
 cd
-git clone http://github.com/SoftwareDefinedBuilding/smap
+git clone http://github.com/SoftwareDefinedBuildings/smap
 cd smap/python
 sudo pip install -e .
