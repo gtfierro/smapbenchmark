@@ -16,3 +16,32 @@ go get gopkg.in/mgo.v2/bson
 go build
 
 # supervisor file
+cat <<EOF > giles.conf
+[program:giles]
+command = /home/$USER/giles/giles/giles
+directory = /home/$USER/giles/giles
+priority = 90
+autorestart = true
+stdout_logfile = /var/log/giles.stdout.log
+stdout_logfile_maxbytes = 50MB
+stdout_logfile_backups = 5
+stderr_logfile = /var/log/giles.stderr.log
+stderr_logfile_maxbytes = 50MB
+stderr_logfile_backups = 5
+
+[program:mongo]
+command = mongod --dbpath=/tmp
+directory = /home/$USER/giles/giles
+priority = 2
+autorestart = true
+stdout_logfile = /var/log/mongo.stdout.log
+stdout_logfile_maxbytes = 50MB
+stdout_logfile_backups = 5
+stderr_logfile = /var/log/mongo.stderr.log
+stderr_logfile_maxbytes = 50MB
+stderr_logfile_backups = 5
+EOF
+
+sudo service mongo stop
+sudo mv giles.conf /etc/supervisor/conf.d/giles.conf
+sudo supervisorctl update
