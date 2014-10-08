@@ -2,6 +2,7 @@ from configobj import ConfigObj
 from sources import create
 import argparse
 import sys
+import shutil
 import subprocess
 import glob
 import os
@@ -56,4 +57,15 @@ elif args.start_sources:
             print "killing",p
             p.terminate()
 elif args.cleanup:
-    print 'cleaningup'
+    print "removing..."
+    inis = glob.glob('sources_*.ini')
+    for ini in inis:
+        print ini
+        ini_conf = ConfigObj(ini)
+        ini_uuid = ini_conf['/']['uuid']
+        os.remove(ini)
+        if os.path.exists(ini_uuid):
+            os.remove(ini_uuid)
+            shutil.rmtree(ini_uuid+"-reports")
+        if os.path.exists(ini_uuid+'.tmp'):
+            os.remove(ini_uuid+".tmp")
