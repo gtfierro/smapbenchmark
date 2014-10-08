@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import glob
 import os
+import time
 
 parser = argparse.ArgumentParser(description="Configure and start sMAP benchmark")
 action = parser.add_mutually_exclusive_group()
@@ -41,6 +42,7 @@ elif args.start_sources:
 
     processes = []
     for ini in inis:
+        time.sleep(1)
         command = "twistd --pidfile {0}.pid -n smap {0}.ini".format(ini)
         p = subprocess.Popen(command, shell=True, stdout=FNULL)
         processes.append(p)
