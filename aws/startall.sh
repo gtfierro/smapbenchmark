@@ -13,5 +13,6 @@ do
         echo "problem connecting to" $ip
         exit 1
     fi
-    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeychecking=no -n -i $keypath $sshuser@$ip 'cd smapbenchmark ; cat config.ini'
+    scp -o UserKnownHostsFile=/dev/null -o StrictHostKeychecking=no -i $keypath ../config.ini $sshuser@$ip:~/smapbenchmark/config.ini
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeychecking=no -n -i $keypath $sshuser@$ip 'cd smapbenchmark ; python start.py -c ; python start.py -s'
 done < ips.csv
