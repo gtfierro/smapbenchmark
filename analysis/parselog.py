@@ -43,7 +43,7 @@ def parsearchiverlog(filename):
 if __name__=='__main__':
     import matplotlib.pyplot as plt
     d = parsegileslog(sys.argv[1])
-    if not d:
+    if d is None or not len(d):
         d = parsearchiverlog(sys.argv[1])
     axis = d[['recv','write']].plot(figsize=(20,15))
     fig = axis.get_figure()
