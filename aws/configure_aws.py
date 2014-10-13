@@ -32,6 +32,7 @@ def get_instance(conn, ami, key, instance, security_groups, subnet):
         print instance,instance.state,instance.ip_address
         time.sleep(5)
         instance.update()
+    print 'GOT ip', instance, instance.state, instance.ip_address
     return instance
 
 def create_some(num):
@@ -45,6 +46,6 @@ if __name__ == '__main__':
     import sys
     num = int(sys.argv[1])
     ips = create_some(num)
-    with open('ips.csv','a+') as f:
+    with open('ips.csv','w+') as f:
         for ip in ips:
             f.write(ip+'\n')
